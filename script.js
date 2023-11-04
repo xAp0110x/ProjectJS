@@ -4,6 +4,7 @@ function ChangeImg(event, source)
 }
 
 let list = document.querySelector(".list");
+let listElements = document.querySelectorAll('li');
 let allCrossIcons = document.querySelectorAll(".cross-icon");
 let buttons = document.querySelector(".add-buttons");
 let button1 = document.querySelector(".plus");
@@ -99,4 +100,32 @@ buttons.addEventListener('click', () => {
         
         list.style.display = 'block';
     }
+});
+
+let sortBool = true
+sortImg.addEventListener('click', () =>{
+    let items = list.childNodes;
+    let arr = [];
+
+    for (let i in items) {
+        if (items[i].nodeType == 1) {
+            arr.push(items[i]);
+        }
+    }
+
+    if (sortBool) {
+        arr.sort(function (a, b) {
+            return a.textContent.localeCompare(b.textContent);
+        });
+    }
+    else {
+        arr.sort(function (a, b) {
+            return b.textContent.localeCompare(a.textContent);
+        });
+    }
+      
+    for (let i = 0; i < arr.length; i++) {
+        list.appendChild(arr[i]);
+    }
+    sortBool = !sortBool
 });
